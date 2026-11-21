@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NALDO GRAFIC | Mockups & Vectorizador Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Librería gratuita de vectorización en el navegador -->
+  <script src="https://cdn.jsdelivr.net/npm/imagetracerjs@1.2.6/imagetracer_v1.2.6.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-badge">NG</span>
+      <div>
+        <h1>NALDO GRAFIC</h1>
+        <p>Estudio de Mockups & Vectorización por Capas</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnDownloadSVG" class="btn btn-outline" disabled>Descargar Vector (.SVG)</button>
+      <button id="btnDownloadPNG" class="btn btn-outline" disabled>PNG Transparente</button>
+      <button id="btnDownloadMockup" class="btn btn-primary">Exportar Mockup (1080×1350)</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- PANEL IZQUIERDO: PRENDA Y POSICIÓN -->
+    <aside class="panel">
+      <h2>1. Prenda y Color Base</h2>
+      <div class="control-group">
+        <label>Tipo de Prenda</label>
+        <select id="garmentType">
+          <option value="tshirt">Franela Cuello Redondo</option>
+          <option value="hoodie">Sudadera / Hoodie</option>
+          <option value="mug">Taza Sublimada 11 oz</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label>Color de la Prenda</label>
+        <div class="color-swatches" id="garmentSwatches">
+          <button class="swatch active" data-color="#ffffff" style="background:#ffffff;" title="Blanco"></button>
+          <button class="swatch" data-color="#111317" style="background:#111317;" title="Negro"></button>
+          <button class="swatch" data-color="#0a2463" style="background:#0a2463;" title="Azul Marino"></button>
+          <button class="swatch" data-color="#1d4ed8" style="background:#1d4ed8;" title="Azul Rey"></button>
+          <button class="swatch" data-color="#ff6b00" style="background:#ff6b00;" title="Naranja"></button>
+          <button class="swatch" data-color="#9ca3af" style="background:#9ca3af;" title="Gris Melange"></button>
+        </div>
+        <input type="color" id="garmentCustomColor" value="#ffffff" />
+      </div>
+
+      <hr />
+      <h2>2. Subir Diseño (Píxeles)</h2>
+      <div class="upload-box" id="dropZone">
+        <input type="file" id="imageInput" accept="image/png, image/jpeg, image/webp" hidden />
+        <p>Haz clic o arrastra tu imagen PNG/JPG aquí</p>
+        <small>Se convertirá a vector editable automáticamente</small>
+      </div>
+
+      <div class="control-group">
+        <label>Cantidad de Colores a Vectorizar: <span id="colorCountLabel">4</span></label>
+        <input type="range" id="numberOfColors" min="2" max="12" value="4" />
+      </div>
+
+      <div class="control-group checkbox-row">
+        <input type="checkbox" id="removeBgCheck" checked />
+        <label for="removeBgCheck">Eliminar color de fondo automáticamente</label>
+      </div>
+
+      <button id="btnRevectorize" class="btn btn-secondary full-width" disabled>Re-vectorizar Imagen</button>
+
+      <hr />
+      <h2>3. Ajuste en Prenda</h2>
+      <div class="control-group">
+        <label>Escala del Diseño (<span id="scaleLabel">100%</span>)</label>
+        <input type="range" id="designScale" min="20" max="200" value="100" />
+      </div>
+      <div class="control-group">
+        <label>Rotación (<span id="rotateLabel">0°</span>)</label>
+        <input type="range" id="designRotate" min="-180" max="180" value="0" />
+      </div>
+      <div class="control-group">
+        <label>Modo de Fusión (Textura tela)</label>
+        <select id="blendMode">
+          <option value="normal">Normal (DTF / Vinil)</option>
+          <option value="multiply">Sublimación (Multiplying)</option>
+        </select>
+      </div>
+    </aside>
+
+    <!-- LIENZO CENTRAL -->
+    <section class="canvas-area">
+      <div class="canvas-wrapper">
+        <canvas id="mockupCanvas" width="1080" height="1350"></canvas>
+      </div>
+      <p class="hint">Arrastra el diseño directamente sobre
